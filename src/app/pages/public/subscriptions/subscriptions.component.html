@@ -1,0 +1,75 @@
+<div class="pricing-container">
+    <div class="pricing-header">
+        <h1>Simple, transparent pricing</h1>
+        <p>Choose the plan that's right for your financial journey.</p>
+
+        <div class="billing-toggle">
+            <span class="active">Monthly</span>
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+            </label>
+            <span>Annually <span class="badge">Save 20%</span></span>
+        </div>
+    </div>
+
+    <div class="pricing-cards">
+        <!-- Basic Plan -->
+        <div class="pricing-card">
+            <div class="card-header">
+                <h3>Basic</h3>
+                <p class="price">$0<span>/mo</span></p>
+                <p class="description">Perfect for individuals just getting started with tracking.</p>
+            </div>
+            <div class="card-body">
+                <ul class="features">
+                    <li><span class="check">✓</span> Link up to 2 bank accounts</li>
+                    <li><span class="check">✓</span> Basic budgeting tools</li>
+                    <li><span class="check">✓</span> Standard dashboard</li>
+                    <li class="disabled"><span class="cross">✕</span> UPI Tracking</li>
+                    <li class="disabled"><span class="cross">✕</span> Investment Portfolio</li>
+                </ul>
+                <button class="btn btn-outline" routerLink="/signup">Get Started</button>
+            </div>
+        </div>
+
+        <!-- Pro Plan (Highlighted) -->
+        <div class="pricing-card popular">
+            <div class="popular-badge">Most Popular</div>
+            <div class="card-header">
+                <h3>Pro</h3>
+                <p class="price">$9.99<span>/mo</span></p>
+                <p class="description">Everything you need to master your personal wealth.</p>
+            </div>
+            <div class="card-body">
+                <ul class="features">
+                    <li><span class="check">✓</span> Link unlimited accounts</li>
+                    <li><span class="check">✓</span> Advanced budgeting & alerts</li>
+                    <li><span class="check">✓</span> Custom dashboard widgets</li>
+                    <li><span class="check">✓</span> Automated UPI tracking</li>
+                    <li class="disabled"><span class="cross">✕</span> Tax reporting tools</li>
+                </ul>
+                <button class="btn btn-primary" routerLink="/signup">Start Free Trial</button>
+            </div>
+        </div>
+
+        <!-- Wealth Plan -->
+        <div class="pricing-card">
+            <div class="card-header">
+                <h3>Wealth</h3>
+                <p class="price">$19.99<span>/mo</span></p>
+                <p class="description">For serious investors and comprehensive net-worth tracking.</p>
+            </div>
+            <div class="card-body">
+                <ul class="features">
+                    <li><span class="check">✓</span> All Pro features</li>
+                    <li><span class="check">✓</span> Live investment tracking</li>
+                    <li><span class="check">✓</span> Crypto exchange sync</li>
+                    <li><span class="check">✓</span> Tax reporting tools</li>
+                    <li><span class="check">✓</span> Priority 24/7 support</li>
+                </ul>
+                <button class="btn btn-outline" routerLink="/signup">Upgrade to Wealth</button>
+            </div>
+        </div>
+    </div>
+</div>

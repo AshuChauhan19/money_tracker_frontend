@@ -1,0 +1,121 @@
+<div class="home-container">
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge">
+                <img src="/logo.png" alt="Logo" class="badge-logo">
+                <span>The New Way to Track</span>
+            </div>
+            <h1 class="hero-title">
+                Take Control of Your <br />
+                <span class="gradient-text">Financial Future</span>
+            </h1>
+            <p class="hero-subtitle">
+                Connect your bank accounts, credit cards, UPI, and investments all in one powerful, secure dashboard.
+                See exactly where your money goes.
+            </p>
+
+            <div class="hero-actions">
+                <button class="btn btn-primary" routerLink="/subscriptions">Start for free</button>
+                <button class="btn btn-secondary" [routerLink]="['/']" fragment="features">See how it works</button>
+            </div>
+
+            <div class="trust-indicators">
+                <div class="avatars">
+                    <div class="avatar" style="background-image: url('https://i.pravatar.cc/100?img=1')"></div>
+                    <div class="avatar" style="background-image: url('https://i.pravatar.cc/100?img=2')"></div>
+                    <div class="avatar" style="background-image: url('https://i.pravatar.cc/100?img=3')"></div>
+                </div>
+                <p>Trusted by 10,000+ users</p>
+            </div>
+        </div>
+
+        <div class="hero-visual">
+            <!-- Decorative Elements -->
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="glass-card main-dashboard">
+                <div class="card-header">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+                <div class="balance-section">
+                    <p class="label">Total Balance</p>
+                    <h2 class="amount">$24,592.00</h2>
+                    <span class="trend positive">+12.5% this month</span>
+                </div>
+                <div class="mini-chart">
+                    <svg viewBox="0 0 200 60" preserveAspectRatio="none">
+                        <path d="M0,60 L0,30 C30,40 50,10 80,20 C110,30 140,5 200,10 L200,60 Z" fill="url(#gradient)"
+                            opacity="0.3"></path>
+                        <path d="M0,30 C30,40 50,10 80,20 C110,30 140,5 200,10" fill="none" stroke="#667eea"
+                            stroke-width="3"></path>
+                        <defs>
+                            <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#667eea"></stop>
+                                <stop offset="100%" stop-color="#667eea" stop-opacity="0"></stop>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="glass-card floating-card card-1">
+                <div class="icon-circle bg-purple">🛒</div>
+                <div class="text">
+                    <p class="title">Groceries</p>
+                    <p class="sub">-$120.50</p>
+                </div>
+            </div>
+            <div class="glass-card floating-card card-2">
+                <div class="icon-circle bg-green">💸</div>
+                <div class="text">
+                    <p class="title">Salary</p>
+                    <p class="sub success">+$4,200.00</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-header">
+            <h2 class="section-title">Everything you need, <br /> nothing you don't.</h2>
+            <p class="section-subtitle">A connected experience designed to give you absolute clarity.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🏦</div>
+                <h3>Bank Accounts</h3>
+                <p>Sync all your checking and savings accounts securely in one place.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💳</div>
+                <h3>Credit Cards</h3>
+                <p>Monitor spending habits and track due dates across all cards.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>UPI Transactions</h3>
+                <p>Automatically fetch and categorize your UPI payments instantly.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <h3>Investments</h3>
+                <p>Watch your wealth grow by tracking stocks, crypto, and mutual funds.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="bottom-cta">
+        <div class="cta-content">
+            <h2>Ready to master your money?</h2>
+            <p>Join thousands of users who have transformed their financial lives.</p>
+            <button class="btn btn-primary large" routerLink="/subscriptions">Create Free Account</button>
+        </div>
+        <div class="bg-shape"></div>
+    </section>
+</div>

@@ -1,0 +1,61 @@
+<div class="contact-container">
+    <div class="contact-header">
+        <h1>Get in Touch</h1>
+        <p>We'd love to hear from you. Our friendly team is always here to chat.</p>
+    </div>
+
+    <div class="contact-content">
+        <div class="contact-info">
+            <div class="info-card">
+                <div class="icon">💬</div>
+                <h3>Chat to sales</h3>
+                <p>Speak to our friendly team.</p>
+                <a href="mailto:hasnext@gmail.com">hasnext&#64;gmail.com</a>
+            </div>
+
+            <div class="info-card">
+                <div class="icon">📍</div>
+                <h3>Visit us</h3>
+                <p>Visit our office HQ.</p>
+                <address>301 , P9 , Prateek Grand City<br>Siddharth Vihar, Ghaziabad, UP 201009</address>
+            </div>
+
+            <div class="info-card">
+                <div class="icon">📞</div>
+                <h3>Call us</h3>
+                <p>Mon-Fri from 8am to 5pm.</p>
+                <a href="tel:+919354774193">+91 93547 74193</a>
+            </div>
+        </div>
+
+        <div class="contact-form-wrapper">
+            <div class="form-card">
+                <h2>Send us a message</h2>
+                <form class="contact-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First name</label>
+                            <input type="text" id="firstName" placeholder="First name">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last name</label>
+                            <input type="text" id="lastName" placeholder="Last name">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="you@company.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" rows="4" placeholder="Leave us a message..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn" (click)="$event.preventDefault()">Send message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

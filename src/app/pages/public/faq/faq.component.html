@@ -1,0 +1,21 @@
+<div class="faq-container">
+    <div class="faq-header">
+        <h1>Frequently Asked Questions</h1>
+        <p>Everything you need to know about MoneyTracker. Can't find the answer you're looking for? Reach out to our
+            team.</p>
+    </div>
+
+    <div class="faq-list">
+        @for (faq of faqs; track faq.question; let i = $index) {
+        <div class="faq-item" [class.open]="faq.isOpen" (click)="toggleFaq(i)">
+            <div class="faq-question">
+                <h3>{{ faq.question }}</h3>
+                <span class="icon">{{ faq.isOpen ? '−' : '+' }}</span>
+            </div>
+            <div class="faq-answer">
+                <p>{{ faq.answer }}</p>
+            </div>
+        </div>
+        }
+    </div>
+</div>
