@@ -7,6 +7,17 @@ import { SubscriptionsComponent } from './pages/public/subscriptions/subscriptio
 import { PrivacyPolicyComponent } from './pages/public/privacy-policy/privacy-policy.component';
 import { TermsComponent } from './pages/public/terms/terms.component';
 
+import { LoginComponent } from './pages/auth/login/login.component';
+import { SignupComponent } from './pages/auth/signup/signup.component';
+import { PlansComponent } from './pages/auth/plans/plans.component';
+import { DashboardLayoutComponent } from './layout/dashboard-layout/dashboard-layout.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { AccountsComponent } from './pages/dashboard/accounts/accounts.component';
+import { TransactionsComponent } from './pages/dashboard/transactions/transactions.component';
+import { BudgetsComponent } from './pages/dashboard/budgets/budgets.component';
+import { InvestmentsComponent } from './pages/dashboard/investments/investments.component';
+import { SettingsComponent } from './pages/dashboard/settings/settings.component';
+
 export const routes: Routes = [
     {
         path: '',
@@ -18,6 +29,21 @@ export const routes: Routes = [
             { path: 'subscriptions', component: SubscriptionsComponent },
             { path: 'privacy-policy', component: PrivacyPolicyComponent },
             { path: 'terms', component: TermsComponent }
+        ]
+    },
+    { path: 'login', component: LoginComponent },
+    { path: 'signup', component: SignupComponent },
+    { path: 'auth/plans', component: PlansComponent },
+    {
+        path: 'dashboard',
+        component: DashboardLayoutComponent,
+        children: [
+            { path: '', component: DashboardComponent },
+            { path: 'accounts', component: AccountsComponent },
+            { path: 'transactions', component: TransactionsComponent },
+            { path: 'budgets', component: BudgetsComponent },
+            { path: 'investments', component: InvestmentsComponent },
+            { path: 'settings', component: SettingsComponent }
         ]
     }
 ];

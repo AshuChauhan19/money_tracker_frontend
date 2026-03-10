@@ -1,0 +1,228 @@
+.dashboard-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+
+    .welcome-header {
+        h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.5rem;
+
+        .stat-card {
+            padding: 1.5rem;
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            transition: transform 0.3s ease;
+
+            &:hover {
+                transform: translateY(-5px);
+                background: rgba(15, 23, 42, 0.6);
+            }
+
+            .stat-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                margin-bottom: 1rem;
+
+                .stat-icon {
+                    font-size: 1.5rem;
+                    background: rgba(99, 102, 241, 0.1);
+                    width: 44px;
+                    height: 44px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 12px;
+                }
+
+                .stat-trend {
+                    font-size: 0.875rem;
+                    font-weight: 700;
+                    padding: 0.25rem 0.6rem;
+                    border-radius: 100px;
+                    background: rgba(239, 68, 68, 0.1);
+                    color: #ef4444;
+
+                    &.positive {
+                        background: rgba(16, 185, 129, 0.1);
+                        color: #10b981;
+                    }
+                }
+            }
+
+            .stat-body {
+                h3 {
+                    font-size: 1.75rem;
+                    font-weight: 800;
+                    color: var(--text-primary);
+                    margin-bottom: 0.25rem;
+                    letter-spacing: -0.02em;
+                }
+
+                p {
+                    font-size: 0.9rem;
+                    color: var(--text-secondary);
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 1.5rem;
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+
+            h2 {
+                font-size: 1.25rem;
+                font-weight: 700;
+                color: var(--text-primary);
+            }
+
+            .time-range,
+            .view-all {
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                color: var(--text-secondary);
+                padding: 0.5rem 1rem;
+                border-radius: 10px;
+                font-size: 0.875rem;
+                cursor: pointer;
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.05);
+                    color: var(--text-primary);
+                }
+            }
+        }
+
+        .glass-card {
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 2rem;
+        }
+
+        .chart-section {
+            .chart-placeholder {
+                height: 300px;
+                display: flex;
+                align-items: flex-end;
+                justify-content: center;
+                padding-bottom: 1rem;
+
+                .bars {
+                    display: flex;
+                    align-items: flex-end;
+                    gap: 1.5rem;
+                    width: 100%;
+                    height: 100%;
+
+                    .bar {
+                        flex: 1;
+                        background: linear-gradient(to top, var(--accent-primary), var(--accent-secondary));
+                        border-radius: 8px 8px 0 0;
+                        opacity: 0.6;
+                        transition: all 0.3s ease;
+
+                        &:hover {
+                            opacity: 1;
+                            transform: scaleX(1.1);
+                        }
+                    }
+                }
+            }
+        }
+
+        .transactions-section {
+            .transaction-list {
+                display: flex;
+                flex-direction: column;
+                gap: 1.25rem;
+
+                .transaction-item {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding-bottom: 1.25rem;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+
+                    &:last-child {
+                        border-bottom: none;
+                        padding-bottom: 0;
+                    }
+
+                    .tx-info {
+                        display: flex;
+                        align-items: center;
+                        gap: 1rem;
+
+                        .tx-avatar {
+                            width: 40px;
+                            height: 40px;
+                            background: rgba(99, 102, 241, 0.1);
+                            color: var(--accent-primary);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-radius: 12px;
+                            font-weight: 700;
+                        }
+
+                        .tx-details {
+                            .tx-name {
+                                font-weight: 600;
+                                color: var(--text-primary);
+                                font-size: 0.95rem;
+                            }
+
+                            .tx-date {
+                                font-size: 0.8rem;
+                                color: var(--text-secondary);
+                            }
+                        }
+                    }
+
+                    .tx-amount {
+                        font-weight: 700;
+                        color: #10b981;
+                        font-size: 0.95rem;
+
+                        &.negative {
+                            color: var(--text-primary);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1100px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr !important;
+    }
+}

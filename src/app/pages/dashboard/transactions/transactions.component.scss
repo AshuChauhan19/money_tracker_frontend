@@ -1,0 +1,184 @@
+.transactions-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+
+            .search-box {
+                position: relative;
+                display: flex;
+                align-items: center;
+
+                .icon {
+                    position: absolute;
+                    left: 1rem;
+                    opacity: 0.5;
+                }
+
+                input {
+                    background: rgba(255, 255, 255, 0.03);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    border-radius: 12px;
+                    padding: 0.6rem 1rem 0.6rem 2.5rem;
+                    color: var(--text-primary);
+                    width: 250px;
+
+                    &:focus {
+                        outline: none;
+                        border-color: var(--accent-primary);
+                    }
+                }
+            }
+
+            .btn {
+                padding: 0.6rem 1.25rem;
+                border-radius: 12px;
+                font-weight: 600;
+                cursor: pointer;
+
+                &-outline {
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    color: var(--text-primary);
+
+                    &:hover {
+                        background: rgba(255, 255, 255, 0.05);
+                    }
+                }
+            }
+        }
+    }
+
+    .filters-bar {
+        display: flex;
+        gap: 0.75rem;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+
+        .filter-chip {
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.06);
+                color: var(--text-primary);
+            }
+
+            &.active {
+                background: rgba(99, 102, 241, 0.1);
+                border-color: rgba(99, 102, 241, 0.3);
+                color: var(--accent-primary);
+            }
+        }
+    }
+
+    .transactions-container {
+        padding: 0;
+        overflow: hidden;
+
+        .table-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr 1fr;
+            padding: 1.25rem 1.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.825rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+        }
+
+        .transaction-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr 1fr;
+            padding: 1.25rem 1.5rem;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            transition: background 0.2s;
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.01);
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            .main-info {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+
+                .avatar {
+                    width: 36px;
+                    height: 36px;
+                    background: rgba(99, 102, 241, 0.1);
+                    color: var(--accent-primary);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 10px;
+                    font-weight: 700;
+                }
+
+                .name {
+                    font-weight: 600;
+                    color: var(--text-primary);
+                    margin-bottom: 0.1rem;
+                }
+
+                .status {
+                    font-size: 0.75rem;
+                    color: #10b981;
+                }
+            }
+
+            .col {
+                font-size: 0.95rem;
+                color: var(--text-secondary);
+            }
+
+            .category-tag {
+                padding: 0.25rem 0.6rem;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 6px;
+                font-size: 0.8rem;
+                color: var(--text-primary);
+            }
+
+            .amount {
+                font-weight: 700;
+                color: var(--text-primary);
+
+                &.positive {
+                    color: #10b981;
+                }
+            }
+
+            .text-right {
+                text-align: right;
+            }
+        }
+    }
+}

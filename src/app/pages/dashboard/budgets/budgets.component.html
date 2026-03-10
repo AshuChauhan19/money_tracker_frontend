@@ -1,0 +1,54 @@
+<div class="budgets-content">
+    <div class="page-header">
+        <div>
+            <h1>Budgeting</h1>
+            <p>Track your spending against your goals.</p>
+        </div>
+        <button class="btn btn-primary">+ Create Budget</button>
+    </div>
+
+    <!-- Budgets Summary -->
+    <div class="summary-cards">
+        <div class="summary-card glass-card">
+            <h3>Total Budgeted</h3>
+            <h2>$2,100.00</h2>
+        </div>
+        <div class="summary-card glass-card">
+            <h3>Total Spent</h3>
+            <h2 class="spent">$1,575.00</h2>
+        </div>
+        <div class="summary-card glass-card">
+            <h3>Remaining</h3>
+            <h2 class="remaining">$525.00</h2>
+        </div>
+    </div>
+
+    <!-- Budget Items -->
+    <div class="budgets-grid">
+        <div class="budget-card glass-card" *ngFor="let budget of budgets">
+            <div class="budget-info">
+                <div class="category">
+                    <h3>{{ budget.category }}</h3>
+                    <p>{{ budget.spent > budget.limit ? 'Over budget' : 'On track' }}</p>
+                </div>
+                <div class="amounts">
+                    <span class="spent">${{ budget.spent }}</span>
+                    <span class="divider">/</span>
+                    <span class="limit">${{ budget.limit }}</span>
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar" [style.width.%]="getPercentage(budget.spent, budget.limit)"
+                    [style.background]="budget.color" [class.danger]="budget.spent > budget.limit">
+                </div>
+            </div>
+
+            <div class="budget-footer">
+                <span>{{ (budget.spent / budget.limit * 100).toFixed(0) }}% used</span>
+                <span class="remaining">${{ budget.limit - budget.spent > 0 ? budget.limit - budget.spent + ' left' :
+                    'Exceeded' }}</span>
+            </div>
+        </div>
+    </div>
+</div>

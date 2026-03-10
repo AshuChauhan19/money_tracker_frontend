@@ -1,0 +1,150 @@
+.budgets-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        p {
+            color: var(--text-secondary);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+    }
+
+    .summary-cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+
+        .summary-card {
+            padding: 2rem;
+            text-align: center;
+
+            h3 {
+                font-size: 0.875rem;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                color: var(--text-secondary);
+                margin-bottom: 0.75rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+                font-weight: 800;
+                color: var(--text-primary);
+
+                &.spent {
+                    color: #6366f1;
+                }
+
+                &.remaining {
+                    color: #10b981;
+                }
+            }
+        }
+    }
+
+    .budgets-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 1.5rem;
+
+        .budget-card {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+
+            .budget-info {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+
+                .category {
+                    h3 {
+                        font-size: 1.25rem;
+                        color: var(--text-primary);
+                        margin-bottom: 0.2rem;
+                    }
+
+                    p {
+                        font-size: 0.8rem;
+                        color: var(--text-secondary);
+                    }
+                }
+
+                .amounts {
+                    display: flex;
+                    align-items: baseline;
+                    gap: 0.3rem;
+                    font-weight: 700;
+
+                    .spent {
+                        font-size: 1.25rem;
+                        color: var(--text-primary);
+                    }
+
+                    .divider {
+                        color: var(--text-secondary);
+                    }
+
+                    .limit {
+                        color: var(--text-secondary);
+                    }
+                }
+            }
+
+            .progress-container {
+                height: 12px;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 100px;
+                overflow: hidden;
+
+                .progress-bar {
+                    height: 100%;
+                    border-radius: 100px;
+                    transition: width 1s ease-in-out;
+
+                    &.danger {
+                        box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+                    }
+                }
+            }
+
+            .budget-footer {
+                display: flex;
+                justify-content: space-between;
+                font-size: 0.875rem;
+                color: var(--text-secondary);
+                font-weight: 500;
+            }
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .summary-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .budgets-grid {
+        grid-template-columns: 1fr;
+    }
+}

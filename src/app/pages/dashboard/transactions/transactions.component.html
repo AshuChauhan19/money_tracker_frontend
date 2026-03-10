@@ -1,0 +1,48 @@
+<div class="transactions-content">
+    <div class="page-header">
+        <h1>Transactions</h1>
+        <div class="header-actions">
+            <div class="search-box">
+                <span class="icon">🔍</span>
+                <input type="text" placeholder="Search transactions...">
+            </div>
+            <button class="btn btn-outline">Export</button>
+        </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters-bar">
+        <button class="filter-chip" *ngFor="let cat of categories" [class.active]="cat === 'All'">
+            {{ cat }}
+        </button>
+    </div>
+
+    <!-- Transactions List -->
+    <div class="transactions-container glass-card">
+        <div class="table-header">
+            <div class="col">Transaction</div>
+            <div class="col">Category</div>
+            <div class="col">Date</div>
+            <div class="col">Payment Method</div>
+            <div class="col text-right">Amount</div>
+        </div>
+
+        <div class="transaction-row" *ngFor="let tx of transactions">
+            <div class="col main-info">
+                <div class="avatar">{{ tx.name[0] }}</div>
+                <div class="details">
+                    <p class="name">{{ tx.name }}</p>
+                    <p class="status">{{ tx.status }}</p>
+                </div>
+            </div>
+            <div class="col">
+                <span class="category-tag">{{ tx.category }}</span>
+            </div>
+            <div class="col date">{{ tx.date }}</div>
+            <div class="col method">{{ tx.method }}</div>
+            <div class="col amount text-right" [class.positive]="tx.amount.startsWith('+')">
+                {{ tx.amount }}
+            </div>
+        </div>
+    </div>
+</div>

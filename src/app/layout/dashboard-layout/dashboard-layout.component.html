@@ -1,0 +1,71 @@
+<div class="dashboard-wrapper" [class.collapsed]="isSidebarCollapsed">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <img src="/logo.png" alt="Logo">
+                <span *ngIf="!isSidebarCollapsed">MoneyTracker</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <span class="icon">📊</span>
+                <span class="label" *ngIf="!isSidebarCollapsed">Overview</span>
+            </a>
+            <a routerLink="/dashboard/accounts" routerLinkActive="active">
+                <span class="icon">🏦</span>
+                <span class="label" *ngIf="!isSidebarCollapsed">Accounts</span>
+            </a>
+            <a routerLink="/dashboard/transactions" routerLinkActive="active">
+                <span class="icon">💸</span>
+                <span class="label" *ngIf="!isSidebarCollapsed">Transactions</span>
+            </a>
+            <a routerLink="/dashboard/budgets" routerLinkActive="active">
+                <span class="icon">🗓️</span>
+                <span class="label" *ngIf="!isSidebarCollapsed">Budgets</span>
+            </a>
+            <a routerLink="/dashboard/investments" routerLinkActive="active">
+                <span class="icon">📈</span>
+                <span class="label" *ngIf="!isSidebarCollapsed">Investments</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a routerLink="/dashboard/settings" routerLinkActive="active">
+                <span class="icon">⚙️</span>
+                <span class="label" *ngIf="!isSidebarCollapsed">Settings</span>
+            </a>
+            <a routerLink="/" class="logout-btn">
+                <span class="icon">🚪</span>
+                <span class="label" *ngIf="!isSidebarCollapsed">Log Out</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="main-area">
+        <header class="top-nav">
+            <button class="toggle-btn" (click)="toggleSidebar()">
+                ☰
+            </button>
+
+            <div class="search-bar">
+                <span class="icon">🔍</span>
+                <input type="text" placeholder="Search transactions...">
+            </div>
+
+            <div class="top-actions">
+                <button class="icon-btn">🔔</button>
+                <div class="user-profile">
+                    <img src="https://i.pravatar.cc/100?img=12" alt="User">
+                    <span *ngIf="!isSidebarCollapsed">John Doe</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="content-body">
+            <router-outlet></router-outlet>
+        </main>
+    </div>
+</div>

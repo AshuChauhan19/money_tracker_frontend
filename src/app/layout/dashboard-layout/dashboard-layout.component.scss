@@ -1,0 +1,242 @@
+.dashboard-wrapper {
+    display: flex;
+    min-height: 100vh;
+    background-color: #020617;
+    color: var(--text-primary);
+
+    .sidebar {
+        width: 260px;
+        background: rgba(15, 23, 42, 0.8);
+        backdrop-filter: blur(20px);
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        flex-direction: column;
+        transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 100;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+
+        .sidebar-header {
+            padding: 1.5rem;
+
+            .logo {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+
+                img {
+                    height: 32px;
+                    border-radius: 6px;
+                }
+
+                span {
+                    font-weight: 800;
+                    font-size: 1.1rem;
+                    white-space: nowrap;
+                }
+            }
+        }
+
+        .sidebar-nav {
+            flex-grow: 1;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+
+            a {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                padding: 0.75rem 1rem;
+                border-radius: 12px;
+                color: var(--text-secondary);
+                transition: all 0.2s ease;
+                white-space: nowrap;
+
+                .icon {
+                    font-size: 1.25rem;
+                }
+
+                .label {
+                    font-weight: 500;
+                }
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.05);
+                    color: var(--text-primary);
+                }
+
+                &.active {
+                    background: var(--accent-primary);
+                    color: white;
+                    box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);
+                }
+            }
+        }
+
+        .sidebar-footer {
+            padding: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+
+            a {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                padding: 0.75rem 1rem;
+                border-radius: 12px;
+                color: var(--text-secondary);
+                transition: all 0.2s ease;
+                white-space: nowrap;
+
+                &:hover {
+                    color: var(--text-primary);
+                }
+
+                &.logout-btn {
+                    color: #ef4444;
+
+                    &:hover {
+                        background: rgba(239, 68, 68, 0.1);
+                    }
+                }
+            }
+        }
+    }
+
+    &.collapsed {
+        .sidebar {
+            width: 80px;
+
+            .sidebar-header {
+                justify-content: center;
+                padding: 1.5rem 0;
+            }
+
+            .sidebar-nav a,
+            .sidebar-footer a {
+                justify-content: center;
+                padding: 0.75rem;
+            }
+        }
+    }
+
+    .main-area {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+
+        .top-nav {
+            height: 72px;
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 90;
+
+            .toggle-btn {
+                font-size: 1.5rem;
+                color: var(--text-secondary);
+                cursor: pointer;
+
+                &:hover {
+                    color: var(--text-primary);
+                }
+            }
+
+            .search-bar {
+                flex-grow: 1;
+                max-width: 400px;
+                position: relative;
+                display: flex;
+                align-items: center;
+
+                .icon {
+                    position: absolute;
+                    left: 1rem;
+                    opacity: 0.5;
+                }
+
+                input {
+                    width: 100%;
+                    background: rgba(255, 255, 255, 0.03);
+                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    border-radius: 100px;
+                    padding: 0.6rem 1rem 0.6rem 2.5rem;
+                    color: var(--text-primary);
+                    font-size: 0.9rem;
+
+                    &:focus {
+                        outline: none;
+                        border-color: var(--accent-primary);
+                        background: rgba(255, 255, 255, 0.05);
+                    }
+                }
+            }
+
+            .top-actions {
+                display: flex;
+                align-items: center;
+                gap: 1.5rem;
+
+                .icon-btn {
+                    font-size: 1.25rem;
+                    color: var(--text-secondary);
+                    cursor: pointer;
+
+                    &:hover {
+                        color: var(--text-primary);
+                    }
+                }
+
+                .user-profile {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.75rem;
+                    cursor: pointer;
+
+                    img {
+                        width: 36px;
+                        height: 36px;
+                        border-radius: 50%;
+                        border: 2px solid var(--accent-primary);
+                    }
+
+                    span {
+                        font-weight: 600;
+                        font-size: 0.9rem;
+                        color: var(--text-primary);
+                    }
+                }
+            }
+        }
+
+        .content-body {
+            padding: 2rem;
+            flex-grow: 1;
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        display: none !important;
+    }
+
+    .main-area .top-nav {
+        padding: 0 1rem;
+    }
+}

@@ -1,0 +1,43 @@
+<div class="accounts-content">
+    <div class="page-header">
+        <div>
+            <h1>Linked Accounts</h1>
+            <p>Manage your bank connections and cards.</p>
+        </div>
+        <button class="btn btn-primary">+ Link New Account</button>
+    </div>
+
+    <!-- Accounts Grid -->
+    <div class="accounts-grid">
+        <div class="account-card glass-card" *ngFor="let acc of bankAccounts">
+            <div class="card-glow" [style.background]="acc.color"></div>
+            <div class="card-top">
+                <div class="icon-box" [style.background]="acc.color + '20'" [style.color]="acc.color">
+                    {{ acc.icon }}
+                </div>
+                <div class="actions">⋮</div>
+            </div>
+            <div class="card-info">
+                <h3>{{ acc.name }}</h3>
+                <p>{{ acc.type }} • {{ acc.number }}</p>
+            </div>
+            <div class="card-bottom">
+                <div class="balance">
+                    <p class="label">Current Balance</p>
+                    <h2 class="amount">{{ acc.balance }}</h2>
+                </div>
+                <div class="status-badge">Active</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Security Info -->
+    <div class="security-banner glass-card">
+        <div class="banner-icon">🛡️</div>
+        <div class="banner-text">
+            <h3>Bank-level Security</h3>
+            <p>MoneyTracker uses 256-bit AES encryption to keep your data safe. We never store your login credentials.
+            </p>
+        </div>
+    </div>
+</div>

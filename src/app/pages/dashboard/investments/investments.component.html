@@ -1,0 +1,60 @@
+<div class="investments-content">
+    <div class="page-header">
+        <h1>Investments</h1>
+        <div class="header-actions">
+            <button class="btn btn-outline">Analytics</button>
+            <button class="btn btn-primary">+ Trade</button>
+        </div>
+    </div>
+
+    <!-- Portfolio Stats -->
+    <div class="investment-stats">
+        <div class="main-card glass-card">
+            <div class="info">
+                <p class="label">Total Portfolio Value</p>
+                <h2>$54,200.50</h2>
+                <div class="performance positive">+8.4% this year</div>
+            </div>
+            <div class="chart-mini">
+                <!-- Mini visualization placeholder -->
+                <div class="line"></div>
+            </div>
+        </div>
+
+        <div class="side-stats">
+            <div class="stat-box glass-card">
+                <p>Stocks</p>
+                <h3>$20,650</h3>
+            </div>
+            <div class="stat-box glass-card">
+                <p>Crypto</p>
+                <h3>$33,550</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Asset List -->
+    <div class="assets-list glass-card">
+        <div class="list-header">
+            <span>Asset</span>
+            <span>Price/Value</span>
+            <span>Holdings</span>
+            <span class="text-right">24h Change</span>
+        </div>
+
+        <div class="asset-row" *ngFor="let asset of portfolio">
+            <div class="asset-info">
+                <div class="icon">{{ asset.icon }}</div>
+                <div>
+                    <p class="symbol">{{ asset.symbol }}</p>
+                    <p class="name">{{ asset.name }}</p>
+                </div>
+            </div>
+            <div class="asset-value">{{ asset.value }}</div>
+            <div class="asset-holdings">{{ asset.quantity }} units</div>
+            <div class="asset-change text-right" [class.positive]="asset.change.startsWith('+')">
+                {{ asset.change }}
+            </div>
+        </div>
+    </div>
+</div>
