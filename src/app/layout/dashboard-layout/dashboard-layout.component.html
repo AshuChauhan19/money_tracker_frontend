@@ -11,7 +11,7 @@
         <nav class="sidebar-nav">
             <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <span class="icon">📊</span>
-                <span class="label" *ngIf="!isSidebarCollapsed">Overview</span>
+                <span class="label" *ngIf="!isSidebarCollapsed">Dashboard</span>
             </a>
             <a routerLink="/dashboard/accounts" routerLinkActive="active">
                 <span class="icon">🏦</span>
@@ -37,7 +37,7 @@
                 <span class="label" *ngIf="!isSidebarCollapsed">Settings</span>
             </a>
             <a routerLink="/" class="logout-btn">
-                <span class="icon">🚪</span>
+                <span class="icon">�</span>
                 <span class="label" *ngIf="!isSidebarCollapsed">Log Out</span>
             </a>
         </div>
@@ -50,10 +50,7 @@
                 ☰
             </button>
 
-            <div class="search-bar">
-                <span class="icon">🔍</span>
-                <input type="text" placeholder="Search transactions...">
-            </div>
+            <div class="header-spacer"></div>
 
             <div class="top-actions">
                 <button class="icon-btn">🔔</button>

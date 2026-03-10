@@ -154,34 +154,8 @@
                 }
             }
 
-            .search-bar {
+            .header-spacer {
                 flex-grow: 1;
-                max-width: 400px;
-                position: relative;
-                display: flex;
-                align-items: center;
-
-                .icon {
-                    position: absolute;
-                    left: 1rem;
-                    opacity: 0.5;
-                }
-
-                input {
-                    width: 100%;
-                    background: rgba(255, 255, 255, 0.03);
-                    border: 1px solid rgba(255, 255, 255, 0.05);
-                    border-radius: 100px;
-                    padding: 0.6rem 1rem 0.6rem 2.5rem;
-                    color: var(--text-primary);
-                    font-size: 0.9rem;
-
-                    &:focus {
-                        outline: none;
-                        border-color: var(--accent-primary);
-                        background: rgba(255, 255, 255, 0.05);
-                    }
-                }
             }
 
             .top-actions {
