@@ -5,31 +5,47 @@
                 <img src="/logo.png" alt="Logo" class="logo-img">
                 <span>MoneyTracker</span>
             </div>
-            <h1>Create an account</h1>
-            <p>Start your journey to financial freedom today.</p>
+
+            <ng-container *ngIf="step === 'details'">
+                <h1>Create an account</h1>
+                <p>Start your journey to financial freedom today.</p>
+            </ng-container>
+
+            <ng-container *ngIf="step === 'otp'">
+                <h1>Verify your account</h1>
+                <p>We've sent a 4-digit code to <b>{{ userData.email }}</b></p>
+            </ng-container>
         </div>
 
-        <form class="auth-form">
+        <div *ngIf="error" class="error-alert animate-shake">
+            <span class="error-icon">⚠️</span> {{ error }}
+        </div>
+
+        <!-- Details Step -->
+        <form *ngIf="step === 'details'" class="auth-form" (ngSubmit)="onSignupSubmit()">
             <div class="form-row">
                 <div class="form-group">
                     <label for="firstName">First name</label>
                     <div class="input-wrapper">
-                        <input type="text" id="firstName" placeholder="John">
+                        <input type="text" id="firstName" name="firstName" [(ngModel)]="userData.firstName"
+                            placeholder="John" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="lastName">Last name</label>
                     <div class="input-wrapper">
-                        <input type="text" id="lastName" placeholder="Doe">
+                        <input type="text" id="lastName" name="lastName" [(ngModel)]="userData.lastName"
+                            placeholder="Doe" required>
                     </div>
                 </div>
             </div>
 
             <div class="form-group has-icon">
-                <label for="email">Email</label>
+                <label for="email">Email address</label>
                 <div class="input-wrapper">
                     <span class="input-icon">📧</span>
-                    <input type="email" id="email" placeholder="john@example.com">
+                    <input type="email" id="email" name="email" [(ngModel)]="userData.email"
+                        placeholder="john@example.com" required>
                 </div>
             </div>
 
@@ -37,7 +53,8 @@
                 <label for="password">Password</label>
                 <div class="input-wrapper">
                     <span class="input-icon">🔒</span>
-                    <input [type]="showPassword ? 'text' : 'password'" id="password" placeholder="Create a password">
+                    <input [type]="showPassword ? 'text' : 'password'" id="password" name="password"
+                        [(ngModel)]="userData.password" placeholder="Create a password" required>
                     <button type="button" class="view-toggle" (click)="togglePassword()">
                         {{ showPassword ? '👁️' : '👁️‍🗨️' }}
                     </button>
@@ -47,21 +64,48 @@
 
             <div class="form-options">
                 <label class="terms">
-                    <input type="checkbox">
-                    <span>I agree to the <a routerLink="/terms">Terms</a> and <a
-                            routerLink="/privacy-policy">Privacy</a></span>
+                    <input type="checkbox" required name="agreed">
+                    <span>I agree to the <a routerLink="/terms" class="legal-link">Terms</a> and <a
+                            routerLink="/privacy-policy" class="legal-link">Privacy</a></span>
                 </label>
             </div>
 
-            <button type="submit" class="btn btn-primary w-full" routerLink="/auth/plans">Create account</button>
+            <button type="submit" class="btn btn-primary w-full"
+                [disabled]="loading || !userData.email || !userData.password">
+                {{ loading ? 'Securing...' : 'Verify Details' }}
+            </button>
+
             <button type="button" class="btn btn-outline w-full google-btn">
                 <img src="https://www.google.com/favicon.ico" alt="Google">
                 Sign up with Google
             </button>
         </form>
 
-        <p class="auth-footer">
-            Already have an account? <a routerLink="/login">Log in</a>
+        <!-- OTP Step -->
+        <form *ngIf="step === 'otp'" class="auth-form otp-form" (ngSubmit)="onVerifySubmit()">
+            <div class="form-group">
+                <label class="otp-label text-center">4-digit verification code</label>
+                <div class="otp-input-container">
+                    <input *ngFor="let digit of otpDigits; let i = index; trackBy: trackByIndex" type="text"
+                        inputmode="numeric" id="otp-{{i}}" name="otp-{{i}}" [(ngModel)]="otpDigits[i]" maxlength="1"
+                        class="otp-digit-input" (input)="onOtpInput($event, i)" (keydown)="onKeyDown($event, i)"
+                        (paste)="onPaste($event)" required placeholder="•">
+                </div>
+                <p class="otp-hint text-center">Copy-paste or type the security code.</p>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-full" [disabled]="loading || !isOtpComplete">
+                {{ loading ? 'Verifying...' : 'Complete Signup' }}
+            </button>
+
+            <div class="otp-actions">
+                <button type="button" class="btn btn-link link-glow" (click)="resendOtp()">Resend Code</button>
+                <button type="button" class="btn btn-link link-alt" (click)="goBack()">Edit Details</button>
+            </div>
+        </form>
+
+        <p class="auth-footer" *ngIf="step === 'details'">
+            Already have an account? <a routerLink="/login" class="highlight-link">Log in</a>
         </p>
     </div>
 </div>

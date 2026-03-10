@@ -1,11 +1,18 @@
 <div class="plans-container">
-    <div class="plans-header">
-        <div class="logo">
-            <img src="/logo.png" alt="Logo">
+    <div class="plans-top-bar">
+        <div class="logo" routerLink="/">
+            <img src="/logo.png" alt="MoneyTracker Logo">
             <span>MoneyTracker</span>
         </div>
-        <h1>Choose your path to wealth</h1>
-        <p>You're almost there! Select a plan to activate your account and start your journey.</p>
+        <button class="logout-btn" (click)="openLogoutModal()">
+            <span class="icon">🚪</span>
+            <span>Sign Out</span>
+        </button>
+    </div>
+
+    <div class="plans-header">
+        <h1>Master your wealth.</h1>
+        <p>Choose the engine that will power your financial freedom.</p>
     </div>
 
     <div class="plans-grid">
@@ -18,22 +25,22 @@
                     <span class="amount">0</span>
                     <span class="period">/mo</span>
                 </div>
-                <p>Perfect for exploring the basics.</p>
+                <p>Lay the foundation of your tracking journey.</p>
             </div>
             <div class="plan-features">
                 <ul>
-                    <li><span class="icon">✓</span> 2 Bank Connections</li>
-                    <li><span class="icon">✓</span> Basic Budgeting</li>
-                    <li><span class="icon">✓</span> Monthly Reports</li>
-                    <li class="disabled"><span class="icon">✕</span> UPI Tracking</li>
+                    <li><span class="icon">✓</span> 2 Financial Hubs</li>
+                    <li><span class="icon">✓</span> Intelligent Budgeting</li>
+                    <li><span class="icon">✓</span> Monthly Analytics</li>
+                    <li class="disabled"><span class="icon">✕</span> UPI Vectoring</li>
                 </ul>
             </div>
-            <button class="btn btn-outline" routerLink="/dashboard">Select Starter</button>
+            <button class="btn btn-outline" routerLink="/dashboard">Deploy Starter</button>
         </div>
 
         <!-- Pro Plan -->
         <div class="plan-card featured">
-            <div class="badge">Recommended</div>
+            <div class="badge">Elite Choice</div>
             <div class="plan-header">
                 <h3>Professional</h3>
                 <div class="price">
@@ -41,17 +48,17 @@
                     <span class="amount">9.99</span>
                     <span class="period">/mo</span>
                 </div>
-                <p>The total package for your money.</p>
+                <p>The core operating system for your net worth.</p>
             </div>
             <div class="plan-features">
                 <ul>
                     <li><span class="icon">✓</span> Unlimited Connections</li>
-                    <li><span class="icon">✓</span> Automated UPI Tracking</li>
-                    <li><span class="icon">✓</span> Custom Categories</li>
-                    <li><span class="icon">✓</span> Priority Support</li>
+                    <li><span class="icon">✓</span> Real-time UPI Sync</li>
+                    <li><span class="icon">✓</span> Advanced Logic Engines</li>
+                    <li><span class="icon">✓</span> Concierge Support</li>
                 </ul>
             </div>
-            <button class="btn btn-primary" routerLink="/dashboard">Buy Pro Plan</button>
+            <button class="btn btn-primary" routerLink="/dashboard">Launch Professional</button>
         </div>
 
         <!-- Wealth Plan -->
@@ -63,21 +70,38 @@
                     <span class="amount">19.99</span>
                     <span class="period">/mo</span>
                 </div>
-                <p>For serious wealth builders.</p>
+                <p>For the vanguard of investment and growth.</p>
             </div>
             <div class="plan-features">
                 <ul>
-                    <li><span class="icon">✓</span> All Pro Features</li>
-                    <li><span class="icon">✓</span> Investment Tracking</li>
-                    <li><span class="icon">✓</span> Tax Optimization</li>
-                    <li><span class="icon">✓</span> 1-on-1 Advisory</li>
+                    <li><span class="icon">✓</span> All Professional Access</li>
+                    <li><span class="icon">✓</span> Multi-Asset Intelligence</li>
+                    <li><span class="icon">✓</span> Tax Optimization Node</li>
+                    <li><span class="icon">✓</span> Private Advisor Channel</li>
                 </ul>
             </div>
-            <button class="btn btn-outline" routerLink="/dashboard">Buy Wealth Plan</button>
+            <button class="btn btn-outline" routerLink="/dashboard">Scale to Wealth</button>
         </div>
     </div>
 
     <div class="plans-footer">
-        <p>Simple pricing. No hidden fees. Cancel anytime.</p>
+        <p>© 2026 MoneyTracker Infrastructure. Secure. Private. Scalable.</p>
+    </div>
+
+    <!-- Enhanced Logout Modal -->
+    <div class="modal-overlay" *ngIf="showLogoutModal" (click)="closeLogoutModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+                <div class="warning-icon">🚪</div>
+                <h2>Secure Exit</h2>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to pause your financial journey and sign out?</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-cancel" (click)="closeLogoutModal()">Keep Exploring</button>
+                <button class="btn-logout" (click)="confirmLogout()">Secure Logout</button>
+            </div>
+        </div>
     </div>
 </div>
