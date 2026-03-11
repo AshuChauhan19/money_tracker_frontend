@@ -99,4 +99,20 @@ export class AuthService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`);
     return this.http.post(`${this.apiUrl}/change-password`, data, { headers });
   }
+
+  /**
+   * @desc    Reset password with OTP
+   */
+  resetPassword(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/reset-password`, data);
+  }
+
+  /**
+   * @desc    Check OTP for Reset Password without clearing it
+   */
+  verifyResetOtp(data: any): Observable<any> {
+    console.log("data" , data);
+    
+    return this.http.post(`${this.apiUrl}/verify-reset-otp`, data);
+  }
 }

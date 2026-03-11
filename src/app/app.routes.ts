@@ -10,6 +10,7 @@ import { TermsComponent } from './pages/public/terms/terms.component';
 import { authGuard, guestGuard } from './guards/auth/auth.guard';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { SignupComponent } from './pages/auth/signup/signup.component';
+import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
 import { PlansComponent } from './pages/auth/plans/plans.component';
 import { DashboardLayoutComponent } from './layout/dashboard-layout/dashboard-layout.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -36,6 +37,7 @@ export const routes: Routes = [
     },
     { path: 'login', component: LoginComponent, canActivate: [guestGuard] },
     { path: 'signup', component: SignupComponent, canActivate: [guestGuard] },
+    { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [guestGuard] },
     { path: 'auth/plans', component: PlansComponent, canActivate: [authGuard] },
     {
         path: 'dashboard',
