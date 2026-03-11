@@ -109,12 +109,16 @@ export class AccountsComponent implements OnInit {
   }
 
   syncAccount(accountId: string) {
+    console.log('Syncing account:', accountId);
     this.bankService.syncTransactions(accountId).subscribe({
       next: (res: any) => {
         if (!res.error) {
           alert(`✅ Synced ${res.result?.synced_count || 0} new transactions!`);
           this.loadAccounts(); // Refresh to show updated balance
         }
+      },
+      error: (err) => {
+        alert('❌ Failed to sync: ' + (err.error?.message || err.message || 'Unknown error'));
       }
     });
   }
@@ -128,6 +132,9 @@ export class AccountsComponent implements OnInit {
           alert('Account consent revoked successfully.');
           this.loadAccounts();
         }
+      },
+      error: (err) => {
+        alert('❌ Failed to revoke: ' + (err.error?.message || err.message || 'Unknown error'));
       }
     });
   }
