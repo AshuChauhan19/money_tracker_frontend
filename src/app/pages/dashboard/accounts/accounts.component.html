@@ -1,43 +1,100 @@
-<div class="accounts-content">
+<div class="accounts-container">
     <div class="page-header">
-        <div>
-            <h1>Linked Accounts</h1>
-            <p>Manage your bank connections and cards.</p>
+        <div class="header-content">
+            <h1>Financial Accounts</h1>
+            <p>Monitor your linked accounts via Setu Account Aggregator.</p>
         </div>
-        <button class="btn btn-primary">+ Link New Account</button>
+        <button class="btn btn-primary" (click)="openConsentModal()">
+            <span class="plus-icon">+</span> Link New Account
+        </button>
     </div>
 
-    <!-- Accounts Grid -->
-    <div class="accounts-grid">
-        <div class="account-card glass-card" *ngFor="let acc of bankAccounts">
-            <div class="card-glow" [style.background]="acc.color"></div>
-            <div class="card-top">
-                <div class="icon-box" [style.background]="acc.color + '20'" [style.color]="acc.color">
-                    {{ acc.icon }}
+    <!-- Empty State -->
+    <div *ngIf="accounts.length === 0 && !loading" class="empty-state glass-card">
+        <div class="empty-icon">🏦</div>
+        <h2>No Accounts Linked</h2>
+        <p>Connect your bank accounts securely via Setu Account Aggregator to start tracking your finances.</p>
+        <button class="btn btn-primary" (click)="openConsentModal()">Connect Now</button>
+    </div>
+
+    <div class="accounts-grid" *ngIf="accounts.length > 0">
+        <div class="account-card glass-card" *ngFor="let acc of accounts">
+            <div class="card-header">
+                <div class="bank-info">
+                    <div class="bank-icon">🏦</div>
+                    <div class="bank-details">
+                        <h3>{{ acc.bank_name || 'Linked Bank' }}</h3>
+                        <p>{{ acc.account_type }} • {{ acc.masked_account_number || '****' }}</p>
+                    </div>
                 </div>
-                <div class="actions">⋮</div>
-            </div>
-            <div class="card-info">
-                <h3>{{ acc.name }}</h3>
-                <p>{{ acc.type }} • {{ acc.number }}</p>
-            </div>
-            <div class="card-bottom">
-                <div class="balance">
-                    <p class="label">Current Balance</p>
-                    <h2 class="amount">{{ acc.balance }}</h2>
+                <div class="card-actions">
+                    <div class="sync-badge" *ngIf="acc.consent_status === 'ACTIVE'" (click)="syncAccount(acc._id)">
+                        🔄 Sync
+                    </div>
+                    <div class="revoke-badge" (click)="revokeAccount(acc._id)" title="Revoke consent">
+                        ✕
+                    </div>
                 </div>
-                <div class="status-badge">Active</div>
+            </div>
+
+            <div class="card-body">
+                <div class="balance-label">Current Balance</div>
+                <div class="balance-amount">₹ {{ acc.balance | number:'1.2-2' }}</div>
+            </div>
+
+            <div class="card-footer">
+                <span class="fi-type">{{ acc.fi_type || 'DEPOSIT' }}</span>
+                <span class="status" [ngClass]="getStatusClass(acc.consent_status)">
+                    {{ acc.consent_status || 'PENDING' }}
+                </span>
             </div>
         </div>
     </div>
 
-    <!-- Security Info -->
-    <div class="security-banner glass-card">
-        <div class="banner-icon">🛡️</div>
-        <div class="banner-text">
-            <h3>Bank-level Security</h3>
-            <p>MoneyTracker uses 256-bit AES encryption to keep your data safe. We never store your login credentials.
-            </p>
+    <!-- Setu Consent Modal -->
+    <div class="modal-overlay" *ngIf="showConsentModal" (click)="closeConsentModal()">
+        <div class="modal-content glass-card" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+                <h2>Link Bank Account</h2>
+                <p>Securely connect your bank via Setu Account Aggregator</p>
+            </div>
+
+            <!-- Step 1: Enter mobile number -->
+            <div *ngIf="!consentUrl" class="consent-step">
+                <form (ngSubmit)="onCreateConsent()" class="link-form">
+                    <div class="form-group">
+                        <label>VUA (Mobile + Handle)</label>
+                        <input type="text" name="mobile" [(ngModel)]="mobileNumber"
+                            placeholder="e.g. 9999999999&#64;setu" required minlength="10">
+                        <small class="help-text">Your Account Aggregator handle (usually mobile_number&#64;setu or &#64;onemoney).</small>
+                    </div>
+
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-outline" (click)="closeConsentModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary" [disabled]="loading || mobileNumber.length < 10">
+                            {{ loading ? 'Creating...' : 'Create Consent' }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Step 2: Consent created — wait for approval -->
+            <div *ngIf="consentUrl" class="consent-step approval-step">
+                <div class="approval-info">
+                    <div class="approval-icon">🔗</div>
+                    <h3>Consent Request Sent!</h3>
+                    <p>A new tab has been opened for you to review and approve the data sharing request.</p>
+                    <p class="sub-text">Complete the approval on Setu's screen, then come back here and click the button below.</p>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-outline" (click)="closeConsentModal()">Cancel</button>
+                    <a [href]="consentUrl" target="_blank" class="btn btn-secondary">Open Again</a>
+                    <button type="button" class="btn btn-primary" (click)="checkConsentStatus()" [disabled]="loading">
+                        {{ loading ? 'Checking...' : 'I\'ve Approved' }}
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
