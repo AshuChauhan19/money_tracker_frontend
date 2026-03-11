@@ -17,6 +17,7 @@ import { TransactionsComponent } from './pages/dashboard/transactions/transactio
 import { BudgetsComponent } from './pages/dashboard/budgets/budgets.component';
 import { InvestmentsComponent } from './pages/dashboard/investments/investments.component';
 import { SettingsComponent } from './pages/dashboard/settings/settings.component';
+import { BankCallbackComponent } from './pages/dashboard/bank-callback/bank-callback.component';
 
 export const routes: Routes = [
     {
@@ -43,7 +44,8 @@ export const routes: Routes = [
             { path: 'transactions', component: TransactionsComponent },
             { path: 'budgets', component: BudgetsComponent },
             { path: 'investments', component: InvestmentsComponent },
-            { path: 'settings', component: SettingsComponent }
+            { path: 'settings', component: SettingsComponent },
+            { path: 'bank-callback', component: BankCallbackComponent }
         ]
     }
 ];

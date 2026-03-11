@@ -1,0 +1,32 @@
+<div class="callback-container">
+    <div class="status-card" *ngIf="status === 'checking'">
+        <div class="spinner"></div>
+        <h2>Verifying your connection...</h2>
+        <p>Please wait while we confirm your bank details securely with Setu.</p>
+    </div>
+
+    <div class="status-card success" *ngIf="status === 'success'">
+        <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+        </div>
+        <h2>Bank Connected Successfully!</h2>
+        <p>Your Account Aggregator consent has been approved securely. We are returning you to your dashboard to sync your transactions.</p>
+        <a routerLink="/dashboard/accounts" class="btn btn-primary">Return to Accounts</a>
+    </div>
+
+    <div class="status-card error" *ngIf="status === 'error'">
+        <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="15" y1="9" x2="9" y2="15"></line>
+                <line x1="9" y1="9" x2="15" y2="15"></line>
+            </svg>
+        </div>
+        <h2>Connection Failed or Rejected</h2>
+        <p>You have chosen not to approve the data sharing request, or an error occurred during the connection process. No data was shared.</p>
+        <a routerLink="/dashboard/accounts" class="btn btn-outline">Go Back</a>
+    </div>
+</div>
