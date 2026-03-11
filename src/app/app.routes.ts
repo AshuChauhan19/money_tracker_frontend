@@ -7,6 +7,7 @@ import { SubscriptionsComponent } from './pages/public/subscriptions/subscriptio
 import { PrivacyPolicyComponent } from './pages/public/privacy-policy/privacy-policy.component';
 import { TermsComponent } from './pages/public/terms/terms.component';
 
+import { authGuard, guestGuard } from './guards/auth/auth.guard';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { SignupComponent } from './pages/auth/signup/signup.component';
 import { PlansComponent } from './pages/auth/plans/plans.component';
@@ -23,6 +24,7 @@ export const routes: Routes = [
     {
         path: '',
         component: PublicLayoutComponent,
+        canActivate: [guestGuard],
         children: [
             { path: '', component: HomeComponent },
             { path: 'faq', component: FaqComponent },
@@ -32,12 +34,13 @@ export const routes: Routes = [
             { path: 'terms', component: TermsComponent }
         ]
     },
-    { path: 'login', component: LoginComponent },
-    { path: 'signup', component: SignupComponent },
-    { path: 'auth/plans', component: PlansComponent },
+    { path: 'login', component: LoginComponent, canActivate: [guestGuard] },
+    { path: 'signup', component: SignupComponent, canActivate: [guestGuard] },
+    { path: 'auth/plans', component: PlansComponent, canActivate: [authGuard] },
     {
         path: 'dashboard',
         component: DashboardLayoutComponent,
+        canActivate: [authGuard],
         children: [
             { path: '', component: DashboardComponent },
             { path: 'accounts', component: AccountsComponent },

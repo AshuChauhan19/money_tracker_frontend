@@ -14,15 +14,45 @@
                 <div class="plan-badge">{{ user.plan }}</div>
             </div>
         </div>
-        <button class="btn btn-outline">Edit Profile</button>
+        <button class="btn btn-outline" (click)="openProfileModal()">Edit Profile</button>
     </div>
 
     <!-- Settings Sections -->
     <div class="settings-grid">
-        <div class="settings-item glass-card" *ngFor="let section of settingsSections">
+        <div class="settings-item glass-card" (click)="openProfileModal()">
             <div class="section-info">
-                <h3>{{ section.title }}</h3>
-                <p>{{ section.description }}</p>
+                <h3>Personal Information</h3>
+                <p>Update your name, email and avatar</p>
+            </div>
+            <div class="section-action">
+                <button class="arrow-btn">➔</button>
+            </div>
+        </div>
+
+        <div class="settings-item glass-card" (click)="openSecurityModal()">
+            <div class="section-info">
+                <h3>Security</h3>
+                <p>Change password and stay secure</p>
+            </div>
+            <div class="section-action">
+                <button class="arrow-btn">➔</button>
+            </div>
+        </div>
+
+        <div class="settings-item glass-card opacity-50 cursor-not-allowed">
+            <div class="section-info">
+                <h3>Notifications</h3>
+                <p>Management email and push alerts (Coming Soon)</p>
+            </div>
+            <div class="section-action">
+                <button class="arrow-btn">➔</button>
+            </div>
+        </div>
+
+        <div class="settings-item glass-card opacity-50 cursor-not-allowed">
+            <div class="section-info">
+                <h3>Billing</h3>
+                <p>Manage your subscription and invoices (Coming Soon)</p>
             </div>
             <div class="section-action">
                 <button class="arrow-btn">➔</button>
@@ -35,5 +65,68 @@
         <h3>Danger Zone</h3>
         <p>Once you delete your account, there is no going back. Please be certain.</p>
         <button class="btn btn-danger">Delete Account</button>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div class="modal-overlay" *ngIf="showProfileModal" (click)="closeModals()">
+        <div class="modal-content glass-card" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+                <h3>Edit Profile</h3>
+                <button class="close-btn" (click)="closeModals()">×</button>
+            </div>
+            <form (ngSubmit)="updateProfile()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Display Name</label>
+                        <input type="text" name="name" [(ngModel)]="profileForm.name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" name="email" [(ngModel)]="profileForm.email" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" (click)="closeModals()">Cancel</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="loading">
+                        {{ loading ? 'Saving...' : 'Save Changes' }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Security Modal -->
+    <div class="modal-overlay" *ngIf="showSecurityModal" (click)="closeModals()">
+        <div class="modal-content glass-card" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+                <h3>Security Settings</h3>
+                <button class="close-btn" (click)="closeModals()">×</button>
+            </div>
+            <form (ngSubmit)="changePassword()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Current Password</label>
+                        <input type="password" name="current_password" [(ngModel)]="securityForm.current_password"
+                            class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>New Password</label>
+                        <input type="password" name="new_password" [(ngModel)]="securityForm.new_password"
+                            class="form-control" required minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm New Password</label>
+                        <input type="password" name="confirm_password" [(ngModel)]="securityForm.confirm_password"
+                            class="form-control" required minlength="6">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" (click)="closeModals()">Cancel</button>
+                    <button type="submit" class="btn btn-danger" [disabled]="loading">
+                        {{ loading ? 'Updating...' : 'Change Password' }}
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

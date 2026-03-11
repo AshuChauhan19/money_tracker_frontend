@@ -17,9 +17,6 @@
             </ng-container>
         </div>
 
-        <div *ngIf="error" class="error-alert animate-shake">
-            <span class="error-icon">⚠️</span> {{ error }}
-        </div>
 
         <!-- Credentials Step -->
         <form *ngIf="step === 'credentials'" class="auth-form" (ngSubmit)="onLoginSubmit()">
@@ -56,11 +53,6 @@
             <button type="submit" class="btn btn-primary w-full"
                 [disabled]="loading || !credentials.email || !credentials.password">
                 {{ loading ? 'Securing...' : 'Verify Identity' }}
-            </button>
-
-            <button type="button" class="btn btn-outline w-full google-btn">
-                <img src="https://www.google.com/favicon.ico" alt="Google">
-                Sign in with Google
             </button>
         </form>
 

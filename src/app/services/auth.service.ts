@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
 
 /**
  * @desc    Service for all User Authentication and Verification
@@ -51,8 +51,9 @@ export class AuthService {
   /**
    * @desc    Log the user out from current session
    */
-  signout(fcm_token: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/signout`, { fcm_token });
+  signout(): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`);
+    return this.http.post(`${this.apiUrl}/signout`, { fcm_token: 'dummy_fcm_token_123456' }, { headers });
   }
 
   /**
@@ -75,5 +76,27 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+  }
+
+  /**
+   * @desc    Update user profile
+   */
+  updateProfile(data: any): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`);
+    return this.http.put(`${this.apiUrl}/update-profile`, data, { headers }).pipe(
+      tap((res: any) => {
+        if (!res.error && res.result) {
+          localStorage.setItem('user', JSON.stringify(res.result));
+        }
+      })
+    );
+  }
+
+  /**
+   * @desc    Change user password
+   */
+  changePassword(data: any): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`);
+    return this.http.post(`${this.apiUrl}/change-password`, data, { headers });
   }
 }

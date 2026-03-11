@@ -36,8 +36,8 @@
                 <span class="icon">⚙️</span>
                 <span class="label" *ngIf="!isSidebarCollapsed">Settings</span>
             </a>
-            <a routerLink="/" class="logout-btn">
-                <span class="icon">�</span>
+            <a (click)="confirmLogout()" class="logout-btn" style="cursor: pointer;">
+                <span class="icon">🚪</span>
                 <span class="label" *ngIf="!isSidebarCollapsed">Log Out</span>
             </a>
         </div>
@@ -56,7 +56,7 @@
                 <button class="icon-btn">🔔</button>
                 <div class="user-profile">
                     <img src="https://i.pravatar.cc/100?img=12" alt="User">
-                    <span *ngIf="!isSidebarCollapsed">John Doe</span>
+                    <span *ngIf="!isSidebarCollapsed">{{ currentUser?.name || 'User' }}</span>
                 </div>
             </div>
         </header>
@@ -64,5 +64,22 @@
         <main class="content-body">
             <router-outlet></router-outlet>
         </main>
+    </div>
+
+    <!-- Logout Confirmation Modal -->
+    <div class="modal-overlay" *ngIf="showLogoutConfirm" (click)="cancelLogout()">
+        <div class="modal-content glass-card" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+                <h3>Confirm Logout</h3>
+                <button class="close-btn" (click)="cancelLogout()">×</button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to log out of your account?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" (click)="cancelLogout()">Cancel</button>
+                <button class="btn btn-danger" (click)="logout()">Log Out</button>
+            </div>
+        </div>
     </div>
 </div>

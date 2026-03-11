@@ -1,14 +1,31 @@
-<div class="transactions-container">
+<div class="transactions-content">
     <div class="page-header">
-        <h1>Transaction History</h1>
-        <p>A comprehensive log of all financial movements across your linked accounts.</p>
+        <h1>Transactions</h1>
+        <div class="header-actions">
+            <div class="search-box">
+                <span class="icon">🔍</span>
+                <input type="text" placeholder="Search transactions..." [(ngModel)]="searchTerm" (ngModelChange)="onSearchChange()">
+            </div>
+            <button class="btn btn-outline">Export</button>
+        </div>
+    </div>
+
+    <!-- Filters Bar -->
+    <div class="filters-bar">
+        <button 
+            *ngFor="let cat of categories" 
+            class="filter-chip" 
+            [class.active]="selectedCategory === cat"
+            (click)="setCategory(cat)">
+            {{ cat }}
+        </button>
     </div>
 
     <!-- Empty State -->
-    <div *ngIf="transactions.length === 0 && !loading" class="empty-state glass-card">
+    <div *ngIf="filteredTransactions.length === 0 && !loading" class="empty-state glass-card">
         <div class="empty-icon">💸</div>
         <h2>No Transactions Found</h2>
-        <p>Your transaction history will appear here once you link a bank account and sync your data.</p>
+        <p>We couldn't find any financial movements matching your filters.</p>
     </div>
 
     <!-- Loading State -->
@@ -17,23 +34,39 @@
         <p>Fetching your latest financial data...</p>
     </div>
 
-    <div class="transactions-list" *ngIf="transactions.length > 0">
-        <div class="transaction-item glass-card" *ngFor="let tx of transactions">
-            <div class="tx-main">
-                <div class="tx-icon">{{ getCategoryIcon(tx.category) }}</div>
-                <div class="tx-details">
-                    <h3>{{ tx.description }}</h3>
-                    <p>{{ tx.bank_account_id?.bank_name }} • {{ tx.transaction_date | date:'mediumDate' }}</p>
+    <!-- Transactions List (Table Layout) -->
+    <div class="transactions-container glass-card" *ngIf="filteredTransactions.length > 0">
+        <div class="table-header">
+            <div class="col">Merchant / Detail</div>
+            <div class="col">Category</div>
+            <div class="col">Status</div>
+            <div class="col">Date</div>
+            <div class="col text-right">Amount</div>
+        </div>
+
+        <div class="transaction-row" *ngFor="let tx of filteredTransactions">
+            <div class="main-info">
+                <div class="avatar">{{ getCategoryIcon(tx.category) }}</div>
+                <div class="details">
+                    <div class="name">{{ tx.description }}</div>
+                    <div class="status">{{ tx.bank_account_id?.bank_name }}</div>
                 </div>
             </div>
 
-            <div class="tx-amount" [class.credit]="tx.transaction_type === 'CREDIT'"
-                [class.debit]="tx.transaction_type === 'DEBIT'">
-                {{ tx.transaction_type === 'CREDIT' ? '+' : '-' }} ₹ {{ tx.amount | number:'1.2-2' }}
+            <div class="col">
+                <span class="category-tag">{{ tx.category }}</span>
             </div>
 
-            <div class="tx-status-badge" [class]="tx.status | lowercase">
-                {{ tx.status }}
+            <div class="col">
+                <span class="status-badge" [class]="tx.status | lowercase">{{ tx.status }}</span>
+            </div>
+
+            <div class="col">
+                {{ tx.transaction_date | date:'mediumDate' }}
+            </div>
+
+            <div class="col amount text-right" [class.positive]="tx.transaction_type === 'CREDIT'">
+                {{ tx.transaction_type === 'CREDIT' ? '+' : '-' }}₹{{ tx.amount | number:'1.2-2' }}
             </div>
         </div>
     </div>

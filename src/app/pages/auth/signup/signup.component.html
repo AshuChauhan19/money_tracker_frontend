@@ -17,9 +17,6 @@
             </ng-container>
         </div>
 
-        <div *ngIf="error" class="error-alert animate-shake">
-            <span class="error-icon">⚠️</span> {{ error }}
-        </div>
 
         <!-- Details Step -->
         <form *ngIf="step === 'details'" class="auth-form" (ngSubmit)="onSignupSubmit()">
@@ -73,11 +70,6 @@
             <button type="submit" class="btn btn-primary w-full"
                 [disabled]="loading || !userData.email || !userData.password">
                 {{ loading ? 'Securing...' : 'Verify Details' }}
-            </button>
-
-            <button type="button" class="btn btn-outline w-full google-btn">
-                <img src="https://www.google.com/favicon.ico" alt="Google">
-                Sign up with Google
             </button>
         </form>
 

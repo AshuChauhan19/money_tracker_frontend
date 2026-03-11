@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
+import { ToastService } from '../../../services/toast.service';
 
 @Component({
     selector: 'app-signup',
@@ -15,7 +16,6 @@ export class SignupComponent {
     step: 'details' | 'otp' = 'details';
     showPassword = false;
     loading = false;
-    error: string | null = null;
 
     // Form fields
     userData = {
@@ -28,7 +28,11 @@ export class SignupComponent {
     // Initialize with empty strings
     otpDigits: string[] = ['', '', '', ''];
 
-    constructor(private auth: AuthService, private router: Router) { }
+    constructor(
+        private auth: AuthService, 
+        private router: Router,
+        private toast: ToastService
+    ) { }
 
     get isOtpComplete(): boolean {
         return this.otpDigits.every(digit => digit !== '' && digit !== null);
@@ -46,7 +50,6 @@ export class SignupComponent {
         if (!this.userData.email || !this.userData.password) return;
 
         this.loading = true;
-        this.error = null;
 
         const payload = {
             name: `${this.userData.firstName} ${this.userData.lastName}`.trim(),
@@ -59,6 +62,7 @@ export class SignupComponent {
                 this.loading = false;
                 if (!res.error) {
                     this.step = 'otp';
+                    this.toast.info("Verification code sent to " + this.userData.email);
                     // Clear any previous OTP data
                     this.otpDigits = ['', '', '', ''];
                     setTimeout(() => {
@@ -66,12 +70,12 @@ export class SignupComponent {
                         if (firstInput) firstInput.focus();
                     }, 100);
                 } else {
-                    this.error = res.message;
+                    this.toast.error(res.message);
                 }
             },
             error: (err: any) => {
                 this.loading = false;
-                this.error = err.error?.message || 'Signup failed. Please try again.';
+                this.toast.error(err.error?.message || 'Signup failed. Please try again.');
             }
         });
     }
@@ -96,7 +100,7 @@ export class SignupComponent {
         input.value = value;
 
         // Move focus forward
-        if (value && index < 3) {
+        if (value !== '' && index < 3) {
             const nextInput = document.getElementById(`otp-${index + 1}`) as HTMLInputElement;
             if (nextInput) nextInput.focus();
         }
@@ -156,7 +160,6 @@ export class SignupComponent {
 
         const otpValue = this.otpDigits.join('');
         this.loading = true;
-        this.error = null;
 
         this.auth.verifyOtp({
             email: this.userData.email,
@@ -165,26 +168,29 @@ export class SignupComponent {
             next: (res: any) => {
                 this.loading = false;
                 if (!res.error) {
+                    this.toast.success("Account created successfully!");
                     this.auth.setSession(res.result);
                     this.router.navigate(['/auth/plans']);
                 } else {
-                    this.error = res.message;
+                    this.toast.error(res.message);
                 }
             },
             error: (err: any) => {
                 this.loading = false;
-                this.error = err.error?.message || 'Verification failed.';
+                this.toast.error(err.error?.message || 'Verification failed.');
             }
         });
     }
 
     resendOtp() {
-        this.auth.resendOtp(this.userData.email).subscribe();
+        this.auth.resendOtp(this.userData.email).subscribe({
+            next: () => this.toast.info("OTP resent successfully"),
+            error: () => this.toast.error("Failed to resend OTP")
+        });
     }
 
     goBack() {
         this.step = 'details';
-        this.error = null;
         this.otpDigits = ['', '', '', ''];
     }
 }
